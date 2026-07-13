@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// Import all your components from the index.js file inside the Components folder
+// import all file here 
 import { 
   Achievement, 
   Contact, 
@@ -59,11 +59,11 @@ export default function App() {
     <div className="min-h-screen relative overflow-x-hidden text-[var(--text)]">
       <AmbientGlow />
       
-      {/* Pass the activeSection state to Nav */}
+     
       <Nav activeSection={activeSection} />
       
       <main className="max-w-6xl mx-auto px-6 sm:px-10 pt-16">
-        {/* Use the exact names you imported at the top */}
+       
         <Home />
         <Experience />
         <Project />

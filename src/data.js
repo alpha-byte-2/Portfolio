@@ -60,7 +60,7 @@ export const PROJECTS = [
 export const SKILL_GROUPS = [
     { label: 'Languages', dot: 'var(--accent)', items: ['C/C++', 'Python', 'Java', 'JavaScript', 'Solidity'] },
     { label: 'Technologies', dot: 'var(--accent-2)', items: ['React.js', 'Node.js', 'Blockchain (Ethereum)', 'DSA', 'OOPs'] },
-    { label: 'Tools & Cloud', dot: 'var(--text-muted)', items: ['Git/GitHub', 'AWS EC2', 'MetaMask', 'Remix IDE', 'Vercel'] },
+    { label: 'Tools & Cloud', dot: 'var(--text-muted)', items: ['Git/GitHub', 'AWS EC2', 'MetaMask', 'Remix IDE', 'Vercel', 'Netlify'] },
 ];
 
 export const EDUCATION = [
@@ -87,7 +87,7 @@ export const EDUCATION = [
 export const ACHIEVEMENTS = [
    {
         title: 'Competitive Programming',
-        description: "Achieved Knight Badge on LeetCode for consistent high-quality problem solving, Pupil rank on Codeforces (Max Rating: 1204+), and a 2-star rating on CodeChef.",
+        description: "Achieved Knight Badge on LeetCode for consistent high-quality problem solving, Pupil rank on Codeforces , and a 2-star rating on CodeChef.",
         links: [
             { label: 'LeetCode Profile', url: 'https://leetcode.com/u/_alpha-byte2/' },
             { label: 'Codeforces Profile', url: 'https://codeforces.com/profile/_alpha_byte' },
