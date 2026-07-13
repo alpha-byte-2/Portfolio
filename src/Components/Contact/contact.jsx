@@ -20,18 +20,43 @@ export default function ContactSection() {
     setForm(f => ({ ...f, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    // prevent the submit button functionality
+ const handleSubmit = async (e) => {
     e.preventDefault();
-        
     
-    setStatus('sent');
+    
+    setStatus('sending');
+        
+    const formData = new FormData();
+    
+    formData.append("access_key",import.meta.env.VITE_WEB3FORMS_ACCESS_KEY); 
+    formData.append("name", form.name);
+    formData.append("email", form.email);
+    formData.append("message", form.message);
+  //  in case if fetch fails try catch
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
 
-  //  reset after 5sec
-    setTimeout(() => {
-        setForm({ name: '', email: '', message: '' }); 
-        setStatus('idle'); 
-    }, 5000);
+      if (response.ok) {
+        setStatus('sent');
+        setTimeout(() => {
+          setForm({ name: '', email: '', message: '' }); 
+          setStatus('idle'); 
+        }, 10000);
+      }
+    } catch (error) {
+    console.error("Error sending message:", error);
+      
+      // show error state
+      setStatus('error'); 
+      
+      // after 5 sec button back to normal
+      setTimeout(() => {
+        setStatus('idle');
+      }, 5000);
+    }
   };
 
   return (
@@ -58,11 +83,15 @@ export default function ContactSection() {
               <textarea id="message" name="message" rows="5" required value={form.message} onChange={handleChange} className={`${inputClasses} resize-none`}></textarea>
             </div>
             
-            <button
+           <button
               type="submit"
-              className={`mt-2 bg-[var(--accent)] text-[var(--bg)] font-mono-custom font-semibold py-3 px-6 rounded-md hover:brightness-110 transition-all w-max ${focusRing} focus-visible:ring-offset-[var(--bg)]`}
+              disabled={status === 'sending'}
+              className={`mt-2 bg-[var(--accent)] text-[var(--bg)] font-mono-custom font-semibold py-3 px-6 rounded-md hover:brightness-110 transition-all w-max ${focusRing} focus-visible:ring-offset-[var(--bg)] ${status === 'sending' ? 'opacity-70 cursor-not-allowed' : ''} ${status === 'error' ? 'bg-red-500' : ''}`}
             >
-              {status === 'sent' ? 'Message sent!' : 'Send message'}
+              {status === 'sending' ? 'Sending...' : 
+               status === 'sent' ? 'Message sent!' : 
+               status === 'error' ? 'Message not sent! Internal error.' : 
+               'Send message'}
             </button>
             
             {status === 'sent' && (
